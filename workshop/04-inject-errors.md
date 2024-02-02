@@ -14,7 +14,7 @@ To run this scenario, you will need to deploy the demo application and enable th
 
 ### Diagnosis
 
-The first step in diagnosing a problem is to determine that a problem exists. Often the first stop will be a metrics dashboard provided by a tool such as Grafana. We can see that CPU went up and that is causing higher latency to responde. Let's find out what's happenning. 
+The first step in diagnosing a problem is to determine that a problem exists. Often the first stop will be a metrics dashboard provided by a tool such as Grafana. We can see that CPU went up and that is causing higher latency to responde. Let's find out what's happening. 
 
 ![Untitled](./images/scenario1_grafana.png)
 
@@ -40,8 +40,6 @@ Returning to the search UI, filter to recommendationservice in the Service dropd
 Now, since this is a contrived scenario, we know where to find the underlying bug in our code. However, in a real-world scenario, we may need to perform further searching to find out what’s going on in our code, or the interactions between services that cause it.
 
 
-
-
 ## Using Metrics and Traces to diagnose an error in adservice and cartservice
 
 ### Start the scenario
@@ -61,12 +59,11 @@ Let's dig deeper. Based on the diagram CartService is being used by CheckoutServ
 
 ![Untitled](./images/scenario2_checkout.png)
 
-As you can see we are seeing some errors so let's start digging deeper to understand what exactly is happenning. Click on one of traces where you see errors. You will be redirected to the page which breaks down the trace shows the path taken by request step by step, service by service. However, most importantely if you click on one of the steps with red warning sign you will be able to see more detail why the step takes so long and what causes the issue.
+As you can see we are seeing some errors so let's start digging deeper to understand what exactly is happening. Click on one of traces where you see errors. You will be redirected to the page which breaks down the trace shows the path taken by request step by step, service by service. However, most importantely if you click on one of the steps with red warning sign you will be able to see more detail why the step takes so long and what causes the issue.
 
 ![Untitled](./images/scenario2_zoomin.png)
 
 In this case you can see that the issue is being caused not being able to connect to redis database. This was super easy to identify so now you can go and investigate why you can't connect to the database.
 
-Using Metrics and Traces to diagnose a memory leak
-https://opentelemetry.io/docs/demo/scenarios/recommendation-cache/
+### Confirming the Diagnosis
 

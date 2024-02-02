@@ -2,3 +2,4 @@ components:
   frontendProxy:
     service:
       type: NodePort
+      port: 8088

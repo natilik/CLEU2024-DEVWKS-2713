@@ -1,35 +1,35 @@
 ## Introduction
-In this part you will be doing following tasks:
+In this part you will be doing the following tasks:
 - Install OpenTelemetry Astronomy Shop Demo - App, Grafana, Jaegar and Locust
-- Learn little bit about OpenTelemetry
-- What is Observability?
-- Access you Astronomy Shop
+- Learn a little bit about OpenTelemetry
+- What is observability?
+- Access your Astronomy Shop
 
 ## Before we start
-Create Caddy configuration:
+Create a Caddy configuration:
 ```bash
 cat > Caddyfile <<EOF
 :8080 {
 
-    @8080 {
+    @8088 {
         path /*
     }
 
-    reverse_proxy @8080 127.0.0.1:8080
-
+    reverse_proxy @8088 127.0.0.1:8088
+}
 :8081 {
 
-    @8089 {
+    @8081 {
         path /*
     }
 
-    reverse_proxy @8089 127.0.0.1:8089
+    reverse_proxy @8081 127.0.0.1:8089
 }
 
 EOF
 ```
 
-Clone workshop Git repository:
+Clone the workshop Git repository:
 ```bash
 cd /root
 git clone https://github.com/natilik/CLEU2024-DEVWKS-2713.git
@@ -38,7 +38,7 @@ git clone https://github.com/natilik/CLEU2024-DEVWKS-2713.git
 ## Install OpenTelemetry Astronomy Shop Demo
 For the workshop we will use OpenTelemetry Astronomy Shop, a microservice-based distributed system intended to illustrate the implementation of OpenTelemetry in a near real-world environment. It is a perfect demo to demonstrate how OpenTelemetry works and what are the benefits.
 
-We will use Helm to deploy OpenTelemetry Astronomy Shop on our dedicated Kubernetes cluster.
+We will use Helm to deploy OpenTelemetry Astronomy Shop on a dedicated Kubernetes cluster. Helm is a package manager for Kubernetes applications. 
 
 You can now add official Consul Helm chart:
 ```bash
@@ -47,7 +47,7 @@ helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm
 
 Now you can deploy Consul in your Kubernetes cluster using Helm:
 ```bash
-helm install my-otel-demo open-telemetry/opentelemetry-demo
+helm install my-otel-demo open-telemetry/opentelemetry-demo -f /root/CLEU2024-DEVWKS-2713/deploy/values.yaml
 ```
 
 You can check the progress with the command:
@@ -102,7 +102,7 @@ caddy run
 
 Now let's verify if the application was deployed properly by accessing it. Expose the application with `kubectl port-forward`:
 ```bash
-kubectl port-forward services/my-otel-demo-frontendproxy 8080:8080
+kubectl port-forward services/my-otel-demo-frontendproxy 8088:8080
 ```
 
 

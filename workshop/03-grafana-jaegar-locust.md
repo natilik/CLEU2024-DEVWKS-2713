@@ -1,7 +1,7 @@
 ## Introduction
 In this part you will be doing following tasks:
 - Simulate user traffic with Locust
-- Learn how to use Jaegar to understand traces
+- Learn how to use Jaeger to understand traces
 - Walk through Grafana and understand basic OpenTelemetry metric dashboard
 - Learn how to use Feature flags
 
@@ -18,7 +18,7 @@ Now let's open Locust. Link should look something like this: `https://app-8081-x
 
 You should see this:
 
-![Untitled](./images/locust_screenshot.png)
+![Locust Screeshot](./images/locust_screenshot.png)
 
 You can see Locust is already running tests against OpenTelemetry Application.
 
@@ -35,23 +35,23 @@ You can open Jaeger via `https://app-8080-xxxx.devenv-testing.ap-ne-1.devnetclou
 
 Let's quickly walk you through Jaeger. Let's start with traces for `adservice`. Select `adservice` from service list and click on "Find Traces". You should see list of traces. You should not see any errors in any of traces.
 
-![Untitled](./images/jaeger_traces.png)
+![Traces screenshot](./images/jaeger_traces.png)
 
 Click on the trace, to get detailed information from it. You will see that the trace consists of spans where each span represents an operation done by the services.
 
 The trace contains a list of spans in a parent-child relation that represent the order of execution along with the time taken by each span. You can see the waterfall overview.
 
-![Untitled](./images/jaeger_trace.png)
+![Trace screenshot](./images/jaeger_trace.png)
 
 You can also use the Directed Acyclic Graph (DAG) graph to view the dependancies between the microservices. Click on "System Architecture" and then on "DAG". You should see the diagram below.
 
-![Untitled](./images/jaeger_dag.png)
+![DAG](./images/jaeger_dag.png)
 
 Surfaced in Jaeger UI as the “Monitor” tab, the motivation for this feature is to help identify interesting traces (e.g. high QPS, slow or erroneous requests) without needing to know the service or operation names up-front.
 
 It is essentially achieved through aggregating span data to produce RED (Request, Error, Duration) metrics.
 
-![Untitled](./images/jaeger_monitor.png)
+![Jaeger Monitor](./images/jaeger_monitor.png)
 
 
 ## Grafana
@@ -59,15 +59,15 @@ Grafana is an open-source platform used for monitoring and observability, allowi
 
 Let's start with application metrics. Go to `https://app-8080-xxxx.devenv-testing.ap-ne-1.devnetcloud.com/grafana/dashboards` and choose "Demo Dashboard". You should see application metrics which provides more detail on how each service is performing including resources. In the top right corner you can choose what service you want to analyze.
 
-![Untitled](./images/grafana_application.png)
+![Grafana App](./images/grafana_application.png)
 
 Next is OpenTelemetry Collector dashboard which will provide you more general information about the collector and data which is collecting from multiple different resources. It provide you more detail in what rate collector recieves and export the data.
 
-![Untitled](./images/grafana_opentel_collector.png)
+![Grafana Collector](./images/grafana_opentel_collector.png)
 
-Last Dashboard "Spanmetrics Demo Dashboard" gives more insight on spans data. It follows RED (Request, Error, Duration) methodology which we have seen in case of Jaegar Monitor dashboard.
+Last Dashboard "Spanmetrics Demo Dashboard" gives more insight on spans data. It follows RED (Request, Error, Duration) methodology which we have seen in case of Jaeger Monitor dashboard.
 
-![Untitled](./images/grafana_spanmetrics.png)
+![Grafana Spanmetrics](./images/grafana_spanmetrics.png)
 
 
 ## Feature flags
