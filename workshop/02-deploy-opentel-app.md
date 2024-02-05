@@ -47,7 +47,7 @@ helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm
 
 Now you can deploy Consul in your Kubernetes cluster using Helm:
 ```bash
-helm install my-otel-demo open-telemetry/opentelemetry-demo -f /root/CLEU2024-DEVWKS-2713/deploy/values.yaml
+helm install my-otel-demo open-telemetry/opentelemetry-demo
 ```
 
 You can check the progress with the command:
@@ -78,9 +78,6 @@ Metrics are aggregations over a period of time of numeric data about your infras
 ### Logs
 A log is a timestamped message emitted by services or other components. Unlike traces, however, they are not necessarily associated with any particular user request or transaction
 
-### Spans
-A span represents a unit of work or operation. It tracks specific operations that a request makes, painting a picture of what happened during the time in which that operation was executed.
-
 ## OpenTelemetry Astronomy Shop Demo Architecture
 
 The application simulates a web shop using 15 different micro-services written 12 different programming languages. It uses a load generator (Locust) to continuously sends requests imitating user shopping flows to the frontend proxy.
@@ -102,7 +99,7 @@ caddy run
 
 Now let's verify if the application was deployed properly by accessing it. Expose the application with `kubectl port-forward`:
 ```bash
-kubectl port-forward services/my-otel-demo-frontendproxy 8088:8080
+kubectl port-forward services/my-otel-demo-frontendproxy 8088:8088
 ```
 
 
